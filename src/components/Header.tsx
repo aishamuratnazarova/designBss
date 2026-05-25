@@ -51,7 +51,7 @@ export default function Header({ currentTab, setTab, onOpenPortal, lang, setLang
     setSearchResults(mockResults);
   };
 
-  const isDarkBg = currentTab === 'main';
+  const isDarkBg = false;
 
   return (
     <header
