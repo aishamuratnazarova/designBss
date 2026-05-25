@@ -1,0 +1,6 @@
+{
+  "name": "BSS Holding",
+  "description": "Официальный сайт фармацевтического и медицинского биотехнологического холдинга БСС с личным кабинетом партнера.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

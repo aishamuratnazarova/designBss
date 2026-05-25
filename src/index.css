@@ -1,0 +1,59 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700;800;900&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", sans-serif;
+  --font-display: "Space Grotesk", sans-serif;
+  --color-brand-teal: #00A8E8;
+  --color-brand-teal-hover: #0096d1;
+  --color-brand-teal-dark: #002B5B;
+  --color-brand-blue-deep: #002B5B;
+  --color-brand-overcast: #99dfff;
+  --color-brand-overcast-light: #f1fafe;
+  --color-brand-black: #1a1a1a;
+}
+
+@layer utilities {
+  .glass-panel {
+    @apply bg-white/70 backdrop-blur-md border border-white/50 shadow-[0_8px_32px_0_rgba(31,38,135,0.07)] rounded-3xl;
+  }
+  .glass-panel-dark {
+    @apply bg-brand-blue-deep/80 backdrop-blur-md border border-white/10 shadow-[0_8px_32px_0_rgba(0,0,0,0.3)] rounded-3xl;
+  }
+  .glass-button {
+    @apply relative overflow-hidden bg-white/20 backdrop-blur-md border border-white/30 text-white shadow-lg transition-all duration-300 hover:bg-white/30 hover:border-white/50 hover:shadow-brand-teal/20 active:scale-95 rounded-full;
+  }
+  .glass-button-primary {
+    @apply relative overflow-hidden bg-brand-teal/80 backdrop-blur-md border border-brand-teal/50 text-white shadow-lg transition-all duration-300 hover:bg-brand-teal hover:border-brand-teal/80 hover:shadow-[0_0_20px_rgba(0,168,232,0.4)] active:scale-95 rounded-full;
+  }
+  .glass-button-dark {
+    @apply relative overflow-hidden bg-brand-blue-deep/60 backdrop-blur-md border border-brand-teal/30 text-white shadow-lg transition-all duration-300 hover:bg-brand-blue-deep/80 hover:border-brand-teal/60 active:scale-95 rounded-full;
+  }
+  .glass-card {
+    @apply bg-white/60 backdrop-blur-lg border border-white/40 shadow-xl transition-all duration-300 hover:shadow-2xl hover:bg-white/80 rounded-3xl;
+  }
+  .glass-header {
+    @apply bg-white/80 backdrop-blur-lg border-b border-white/20 shadow-sm;
+  }
+}
+
+/* Custom styles for sleek high-end look */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #f8fafc;
+}
+::-webkit-scrollbar-thumb {
+  background: #00A8E8;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #0096d1;
+}
+
+/* Scroll behave smooth */
+html {
+  scroll-behavior: smooth;
+}
