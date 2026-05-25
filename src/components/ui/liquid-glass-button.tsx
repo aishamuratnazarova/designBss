@@ -64,7 +64,7 @@ export const liquidbuttonVariants = cva(
     variants: {
       variant: {
         default: "bg-white/10 text-white hover:bg-white/20 backdrop-blur-md border border-white/20 shadow-sm",
-        primary: "bg-brand-teal/90 text-white hover:bg-brand-teal backdrop-blur-md border border-white/20 shadow-[0_4px_12px_rgba(0,168,232,0.2)] hover:shadow-[0_4px_16px_rgba(0,168,232,0.4)]",
+        primary: "bg-brand-teal/90 text-white hover:bg-brand-teal backdrop-blur-md border border-white/20 shadow-[0_4px_12px_rgba(11,207,202,0.2)] hover:shadow-[0_4px_16px_rgba(11,207,202,0.4)]",
         destructive: "bg-red-500/80 text-white hover:bg-red-600 backdrop-blur-md border border-red-500/30",
         outline: "border border-white/30 bg-transparent hover:bg-white/10 text-white backdrop-blur-sm",
         secondary: "bg-gray-800/60 text-white hover:bg-gray-800/80 backdrop-blur-md border border-gray-700/50",

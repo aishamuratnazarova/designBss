@@ -62,7 +62,7 @@ export default function Hero({ setTab, onOpenPortal, lang }: HeroProps) {
   const prevSlide = () => setActiveSlide((prev) => (prev - 1 + slides.length) % slides.length);
 
   return (
-    <section id="hero-slider" className="relative h-[100vh] min-h-[600px] bg-neutral-900 overflow-hidden text-white">
+    <section id="hero-slider" className="relative h-[100vh] min-h-[600px] bg-slate-50 overflow-hidden text-neutral-800">
       
       {/* BACKGROUND GRAPHICS */}
       {slides.map((slide, index) => (
@@ -71,7 +71,7 @@ export default function Hero({ setTab, onOpenPortal, lang }: HeroProps) {
           className={`absolute inset-0 bg-cover bg-center transition-opacity duration-1000 ${index === activeSlide ? 'opacity-100' : 'opacity-0'}`} 
           style={{ backgroundImage: `url(${slide.image})` }}
         >
-          <div className="absolute inset-0 bg-black/40" />
+          <div className="absolute inset-0 bg-white/5 pointer-events-none" />
         </div>
       ))}
 
@@ -83,26 +83,26 @@ export default function Hero({ setTab, onOpenPortal, lang }: HeroProps) {
             index === activeSlide ? 'opacity-100 translate-x-0 z-10' : 'opacity-0 translate-x-full z-0 pointer-events-none'
           }`}
         >
-          {/* Slide color tint overlay */}
-          <div className={`absolute inset-0 bg-gradient-to-r ${slide.bgGradient} mix-blend-multiply`} />
+          {/* Slide light gradient overlay for readability and pure brand aesthetics */}
+          <div className="absolute inset-0 bg-gradient-to-r from-slate-50/95 via-slate-50/75 to-transparent pointer-events-none" />
 
           {/* SLIDE CONTENT CONTAINER */}
           <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full pt-16 z-20">
             <div className="max-w-3xl space-y-6">
               
               {/* Badge */}
-              <div className="inline-flex items-center space-x-2 glass-panel-dark px-4 py-1.5 rounded-full border-brand-teal/40 text-[10px] font-bold tracking-[0.2em] text-[#00A8E8] uppercase animate-fade-in">
+              <div className="inline-flex items-center space-x-2 bg-brand-teal/10 border border-brand-teal/20 px-4 py-1.5 rounded-full text-[10px] font-bold tracking-[0.2em] text-brand-teal-hover uppercase animate-fade-in">
                 <ShieldCheck className="w-3.5 h-3.5 text-brand-teal" />
-                <span>{slide.badge}</span>
+                <span className="text-brand-teal-hover">{slide.badge}</span>
               </div>
 
               {/* H1 Title */}
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-display font-extrabold tracking-tight leading-[1.1] text-white drop-shadow-lg">
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-display font-extrabold tracking-tight leading-[1.1] text-brand-blue-deep">
                 {slide.title}
               </h1>
 
               {/* Subtitle */}
-              <p className="text-base sm:text-lg text-gray-200 font-light leading-relaxed drop-shadow-sm max-w-2xl font-sans">
+              <p className="text-base sm:text-lg text-neutral-600 font-normal leading-relaxed max-w-2xl font-sans">
                 {slide.subtitle}
               </p>
 
@@ -111,15 +111,15 @@ export default function Hero({ setTab, onOpenPortal, lang }: HeroProps) {
                 <LiquidButton
                   onClick={slide.primaryAction.onClick}
                   variant="primary"
-                  className="text-[10px] sm:text-xs font-bold uppercase tracking-widest"
+                  className="text-[10px] sm:text-xs font-bold uppercase tracking-widest text-white"
                 >
                   <span>{slide.primaryAction.label}</span>
                   <ArrowRight className="w-3.5 h-3.5 ml-2" />
                 </LiquidButton>
                 <LiquidButton
                   onClick={slide.secondaryAction.onClick}
-                  variant="default"
-                  className="text-[10px] sm:text-xs font-bold uppercase tracking-widest"
+                  variant="outline"
+                  className="text-[10px] sm:text-xs font-bold uppercase tracking-widest border border-brand-teal/30 bg-white/50 text-neutral-800 hover:bg-white"
                 >
                   <span>{slide.secondaryAction.label}</span>
                 </LiquidButton>
@@ -140,7 +140,7 @@ export default function Hero({ setTab, onOpenPortal, lang }: HeroProps) {
               key={i}
               onClick={() => setActiveSlide(i)}
               className={`h-1.5 transition-all duration-500 ease-out cursor-pointer ${
-                i === activeSlide ? 'w-14 bg-brand-teal' : 'w-4 bg-white/30 hover:bg-white/50'
+                i === activeSlide ? 'w-14 bg-brand-teal' : 'w-4 bg-neutral-300 hover:bg-neutral-400'
               }`}
               title={`Slide ${i+1}`}
             />
@@ -149,20 +149,20 @@ export default function Hero({ setTab, onOpenPortal, lang }: HeroProps) {
 
         {/* Arrow Controls */}
         <div className="flex space-x-3">
-          <LiquidButton
+          <button
             onClick={prevSlide}
-            className="w-10 h-10 rounded-full border border-white/20 bg-black/20 hover:bg-black/40 flex items-center justify-center transition-colors hover:border-white"
+            className="w-10 h-10 rounded-full border border-neutral-200 bg-white/80 hover:bg-white text-neutral-700 flex items-center justify-center transition-all shadow-sm cursor-pointer active:scale-95"
             title="Назад"
           >
             <ChevronLeft className="w-5 h-5" />
-          </LiquidButton>
-          <LiquidButton
+          </button>
+          <button
             onClick={nextSlide}
-            className="w-10 h-10 rounded-full border border-white/20 bg-black/20 hover:bg-black/40 flex items-center justify-center transition-colors hover:border-white"
+            className="w-10 h-10 rounded-full border border-neutral-200 bg-white/80 hover:bg-white text-neutral-700 flex items-center justify-center transition-all shadow-sm cursor-pointer active:scale-95"
             title="Вперед"
           >
             <ChevronRight className="w-5 h-5" />
-          </LiquidButton>
+          </button>
         </div>
 
       </div>
