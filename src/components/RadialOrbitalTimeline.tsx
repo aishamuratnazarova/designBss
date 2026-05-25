@@ -22,7 +22,7 @@ const Button = ({ children, className = "", onClick, ...props }: React.ButtonHTM
 );
 
 const Card = ({ children, className = "" }: { children: React.ReactNode; className?: string }) => (
-  <div className={`glass-panel-dark relative ${className}`}>
+  <div className={`glass-card bg-white shadow-lg border border-gray-100 relative ${className}`}>
     {children}
   </div>
 );
@@ -34,13 +34,13 @@ const CardHeader = ({ children, className = "" }: { children: React.ReactNode; c
 );
 
 const CardTitle = ({ children, className = "" }: { children: React.ReactNode; className?: string }) => (
-  <h3 className={`font-semibold leading-none tracking-tight text-white ${className}`}>
+  <h3 className={`font-semibold leading-none tracking-tight text-neutral-900 ${className}`}>
     {children}
   </h3>
 );
 
 const CardContent = ({ children, className = "" }: { children: React.ReactNode; className?: string }) => (
-  <div className={`p-4 pt-0 text-zinc-300 ${className}`}>
+  <div className={`p-4 pt-0 text-gray-600 ${className}`}>
     {children}
   </div>
 );
@@ -343,19 +343,19 @@ export default function RadialOrbitalTimeline({
   const getStatusStyles = (status: TimelineItem["status"]): string => {
     switch (status) {
       case "completed":
-        return "text-white bg-emerald-600 border-none";
+        return "text-emerald-700 bg-emerald-50 border border-emerald-200";
       case "in-progress":
-        return "text-zinc-950 bg-brand-teal border-none animate-pulse";
+        return "text-white bg-brand-teal border-none animate-pulse";
       case "pending":
-        return "text-zinc-300 bg-zinc-800 border-none";
+        return "text-gray-600 bg-gray-100 border border-gray-200";
       default:
-        return "text-white bg-zinc-800 border-none";
+        return "text-gray-700 bg-gray-100 border border-gray-200";
     }
   };
 
   return (
-    <section className="py-20 bg-zinc-950 text-white relative border-t border-b border-zinc-900 overflow-hidden select-none">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(0,159,156,0.08)_0%,transparent_70%)] pointer-events-none"></div>
+    <section className="py-20 bg-slate-50 text-neutral-800 relative border-t border-b border-gray-200 overflow-hidden select-none">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(0,159,156,0.05)_0%,transparent_70%)] pointer-events-none"></div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 flex flex-col items-center">
         {/* Title elements */}
@@ -363,10 +363,10 @@ export default function RadialOrbitalTimeline({
           <span className="text-[10px] uppercase font-bold text-brand-teal tracking-widest bg-brand-teal/10 px-2.5 py-1 rounded">
             {lang === "RU" ? "Интерактивная Карта Структуры" : "Interactive Corporate Map"}
           </span>
-          <h2 className="text-3xl font-extrabold text-white tracking-tight mt-3">
+          <h2 className="text-3xl font-extrabold text-neutral-900 tracking-tight mt-3">
             {lang === "RU" ? "Юридические лица БСС Холдинга" : "Legal Entities of BSS Holding"}
           </h2>
-          <p className="text-xs text-zinc-400 mt-2 font-light">
+          <p className="text-xs text-gray-500 mt-2 font-light">
             {lang === "RU"
               ? "Исследуйте ключевые дочерние компании и уставную структуру холдинга в космической интерактивной орбите. Кликните на элементы для подробностей."
               : "Explore our constituent legal entities, subsidiary departments and connected workflows in an interactive cosmic orbit."}
@@ -377,7 +377,7 @@ export default function RadialOrbitalTimeline({
         <div
           ref={containerRef}
           onClick={handleContainerClick}
-          className="w-full max-w-4xl h-[520px] sm:h-[600px] flex items-center justify-center glass-panel-dark relative overflow-hidden"
+          className="w-full max-w-4xl h-[520px] sm:h-[600px] flex items-center justify-center relative overflow-hidden"
         >
           {/* Orbital grid systems */}
           <div
@@ -400,7 +400,7 @@ export default function RadialOrbitalTimeline({
 
             {/* Simulated orbit tracks */}
             <div
-              className="absolute rounded-full border border-zinc-800/60 pointer-events-none"
+              className="absolute rounded-full border border-gray-200 pointer-events-none"
               style={{ width: `${radius * 2}px`, height: `${radius * 2}px` }}
             ></div>
 
@@ -446,13 +446,13 @@ export default function RadialOrbitalTimeline({
                   {/* Node Circle */}
                   <div
                     className={`
-                      w-10 h-10 rounded-full flex items-center justify-center
+                      w-10 h-10 rounded-full flex items-center justify-center shadow-sm
                       ${
                         isExpanded
                           ? "bg-brand-teal text-white"
                           : isRelated
-                          ? "bg-brand-teal/20 text-brand-teal"
-                          : "bg-zinc-900 text-zinc-300"
+                          ? "bg-brand-teal/10 text-brand-teal"
+                          : "bg-white text-gray-500"
                       }
                       border-2 
                       ${
@@ -460,7 +460,7 @@ export default function RadialOrbitalTimeline({
                           ? "border-brand-teal shadow-lg shadow-brand-teal/40"
                           : isRelated
                           ? "border-brand-teal animate-pulse"
-                          : "border-zinc-700/60"
+                          : "border-gray-200"
                       }
                       transition-all duration-300 transform hover:scale-110 active:scale-95
                     `}
@@ -474,7 +474,7 @@ export default function RadialOrbitalTimeline({
                       absolute top-11 whitespace-nowrap
                       text-[9px] sm:text-[10px] font-bold tracking-wider
                       transition-all duration-300
-                      ${isExpanded ? "text-brand-teal scale-110" : "text-zinc-400"}
+                      ${isExpanded ? "text-brand-teal scale-110" : "text-gray-500"}
                     `}
                   >
                     {item.title}
@@ -491,7 +491,7 @@ export default function RadialOrbitalTimeline({
                               ? (item.status === "completed" ? "АКТИВНО" : "РИТЕЙЛ/В РАЗВИТИИ")
                               : (item.status === "completed" ? "ACTIVE" : "IN PROGRESS")}
                           </Badge>
-                          <span className="text-[9px] font-mono text-zinc-500">
+                          <span className="text-[9px] font-mono text-gray-400">
                             {item.date}
                           </span>
                         </div>
@@ -501,18 +501,18 @@ export default function RadialOrbitalTimeline({
                       </CardHeader>
                       
                       <CardContent className="text-[10px] sm:text-xs">
-                        <p className="leading-relaxed font-light text-zinc-300">{item.content}</p>
+                        <p className="leading-relaxed font-light text-gray-600">{item.content}</p>
 
                         {/* Energy Level Bar */}
-                        <div className="mt-3 pt-2.5 border-t border-zinc-800">
-                          <div className="flex justify-between items-center text-[9px] text-zinc-400 mb-1">
+                        <div className="mt-3 pt-2.5 border-t border-gray-100">
+                          <div className="flex justify-between items-center text-[9px] text-gray-500 mb-1">
                             <span className="flex items-center">
                               <Zap size={9} className="mr-0.5 text-brand-teal" />
                               {lang === "RU" ? "Ресурсная доля" : "Operational Share"}
                             </span>
-                            <span className="font-mono text-white">{item.energy}%</span>
+                            <span className="font-mono text-neutral-800">{item.energy}%</span>
                           </div>
-                          <div className="w-full h-1 bg-zinc-800 rounded-full overflow-hidden">
+                          <div className="w-full h-1 bg-gray-100 rounded-full overflow-hidden">
                             <div
                               className="h-full bg-gradient-to-r from-teal-500 to-indigo-600"
                               style={{ width: `${item.energy}%` }}
@@ -522,10 +522,10 @@ export default function RadialOrbitalTimeline({
 
                         {/* Connected subsidiaries mapping */}
                         {item.relatedIds.length > 0 && (
-                          <div className="mt-3 pt-2.5 border-t border-zinc-800">
+                          <div className="mt-3 pt-2.5 border-t border-gray-100">
                             <div className="flex items-center mb-1.5">
-                              <Link size={10} className="text-zinc-400 mr-1" />
-                              <h4 className="text-[9px] uppercase tracking-wider font-semibold text-zinc-400">
+                              <Link size={10} className="text-gray-400 mr-1" />
+                              <h4 className="text-[9px] uppercase tracking-wider font-semibold text-gray-500">
                                 {lang === "RU" ? "Связанные фирмы" : "Affiliated Firms"}
                               </h4>
                             </div>
@@ -535,7 +535,7 @@ export default function RadialOrbitalTimeline({
                                 return (
                                   <Button
                                     key={relatedId}
-                                    className="flex items-center h-5 px-1.5 py-0 text-[8px] font-bold rounded bg-zinc-900 border border-zinc-800 hover:bg-brand-teal/10 hover:border-brand-teal/40 hover:text-brand-teal text-zinc-400 transition-colors"
+                                    className="flex items-center h-5 px-1.5 py-0 text-[8px] font-bold rounded bg-gray-50 border border-gray-200 hover:bg-brand-teal/10 hover:border-brand-teal/40 hover:text-brand-teal text-gray-500 transition-colors"
                                     onClick={(e) => {
                                       e.stopPropagation();
                                       toggleItem(relatedId);
@@ -558,8 +558,8 @@ export default function RadialOrbitalTimeline({
           </div>
 
           {/* Orbit rotation controls at the bottom left-right inside coordinate box */}
-          <div className="absolute bottom-3 left-3 right-3 flex justify-between items-center bg-zinc-900/40 p-2 rounded-xl backdrop-blur-md border border-zinc-800/60 pointer-events-auto">
-            <span className="text-[8px] font-mono tracking-widest text-zinc-500 uppercase">
+          <div className="absolute bottom-3 left-3 right-3 flex justify-between items-center bg-white/60 p-2 rounded-xl backdrop-blur-md border border-gray-200 pointer-events-auto shadow-sm">
+            <span className="text-[8px] font-mono tracking-widest text-gray-500 uppercase">
               {lang === "RU" ? "СИСТЕМА: СТАБИЛЬНА" : "SYSTEM: STABLE"}
             </span>
             <Button
