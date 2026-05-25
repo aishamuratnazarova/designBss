@@ -19,41 +19,31 @@ export default function Logo({
   onClick,
   lang = 'RU',
 }: LogoProps) {
-  // Determine color bases based on variant and stickiness
+  // Determine color bases based on variant
   // The official logo color is #009F9C (corporate medical teal)
   const getColors = () => {
     if (variant === 'light') {
       return {
         tree: '#009F9C',
         arc: '#009F9C',
-        text_bss: '#009F9C',
-        text_sub: '#009F9C',
-      };
-    }
-    if (variant === 'dark') {
-      return {
-        tree: '#FFFFFF',
-        arc: '#FFFFFF',
         text_bss: '#FFFFFF',
-        text_sub: '#A8C5DA',
+        text_sub: '#D1D5DB', // gray-300
       };
     }
-    // Adaptive mode (usually for Header)
-    if (isSticky) {
+    if (variant === 'dark' || variant === 'adaptive') {
       return {
         tree: '#009F9C',
         arc: '#009F9C',
         text_bss: '#002B5B',
         text_sub: '#4B5563', // gray-600
       };
-    } else {
-      return {
-        tree: '#FFFFFF',
-        arc: '#FFFFFF',
-        text_bss: '#FFFFFF',
-        text_sub: '#D1D5DB', // gray-300
-      };
     }
+    return {
+      tree: '#009F9C',
+      arc: '#009F9C',
+      text_bss: '#009F9C',
+      text_sub: '#009F9C',
+    };
   };
 
   const colors = getColors();
@@ -195,8 +185,8 @@ export default function Logo({
               x="60"
               y="112"
               textAnchor="middle"
-              className="font-serif font-black"
-              style={{ fontFamily: 'Georgia, "Times New Roman", serif', fontSize: '18px', fill: colors.text_bss }}
+              className="font-display font-black"
+              style={{ fontSize: '18px', fill: colors.text_bss }}
             >
               {lang === 'RU' ? 'БСС' : 'BSS'}
             </text>
@@ -207,11 +197,9 @@ export default function Logo({
       {/* Accompanying textual branding elements (standard HTML flow next to the SVG image/icon) */}
       {showText && (
         <div className="flex items-center">
-          {/* Majestic serif typeface for БСС */}
           <span
-            className="font-serif font-bold text-3xl tracking-widest"
+            className="font-display font-extrabold text-3xl tracking-widest"
             style={{
-              fontFamily: 'Georgia, "Times New Roman", serif',
               color: colors.text_bss,
             }}
           >

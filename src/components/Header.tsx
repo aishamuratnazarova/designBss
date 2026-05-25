@@ -12,23 +12,10 @@ interface HeaderProps {
 }
 
 export default function Header({ currentTab, setTab, onOpenPortal, lang, setLang }: HeaderProps) {
-  const [isSticky, setIsSticky] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [searchResults, setSearchResults] = useState<string[]>([]);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 20) {
-        setIsSticky(true);
-      } else {
-        setIsSticky(false);
-      }
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   const navItems = [
     { id: 'main', label: lang === 'RU' ? 'Главная' : 'Home' },
@@ -64,65 +51,54 @@ export default function Header({ currentTab, setTab, onOpenPortal, lang, setLang
     setSearchResults(mockResults);
   };
 
+  const isDarkBg = currentTab === 'main';
+
   return (
     <header
       id="global-header"
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isSticky
-          ? 'glass-header py-0 text-black'
-          : 'bg-gradient-to-b from-black/60 to-transparent py-0 text-white'
-      }`}
+      className="absolute top-0 left-0 right-0 z-50 py-2"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-20">
+        <div className="flex items-center justify-between h-24">
           
           {/* LOGO */}
           <Logo
             onClick={() => setTab('main')}
             size={36}
             showText={true}
-            isSticky={isSticky}
+            variant={isDarkBg ? 'light' : 'adaptive'}
             lang={lang}
-            className="cursor-pointer group"
+            className="cursor-pointer group hover:opacity-80 transition-opacity"
           />
 
           {/* DESKTOP MENU */}
-          <nav className="hidden lg:flex items-center space-x-1">
+          <nav className={`hidden lg:flex items-center space-x-1 px-2 py-1 rounded-2xl ${isDarkBg ? 'bg-black/10 backdrop-blur-md border border-white/5' : 'bg-white/50 backdrop-blur-md border border-black/5 shadow-sm'}`}>
             {navItems.map((item) => (
               <LiquidButton
                 key={item.id}
                 variant="ghost"
                 size="sm"
                 onClick={() => setTab(item.id)}
-                className={`px-3 py-2 rounded-sm text-[11px] font-bold uppercase tracking-widest transition-all duration-200 relative ${
+                className={`px-4 py-2 rounded-xl text-[11px] font-bold uppercase tracking-widest transition-all duration-300 relative ${
                   currentTab === item.id
-                    ? isSticky 
-                      ? 'text-brand-blue-deep bg-gray-50' 
-                      : 'text-white bg-white/10'
-                    : isSticky 
-                      ? 'text-gray-500 hover:text-brand-blue-deep hover:bg-gray-50' 
-                      : 'text-gray-200 hover:text-white hover:bg-white/5'
+                    ? (isDarkBg ? 'text-white bg-white/10 shadow-sm' : 'text-brand-teal bg-white shadow-sm ring-1 ring-black/5')
+                    : (isDarkBg ? 'text-gray-300 hover:text-white hover:bg-white/5' : 'text-gray-600 hover:text-brand-teal hover:bg-black/5')
                 }`}
               >
                 {item.label}
-                {currentTab === item.id && (
-                  <span className="absolute bottom-1 left-3 right-3 h-0.5 bg-brand-teal rounded-full" />
-                )}
               </LiquidButton>
             ))}
           </nav>
 
           {/* ACTIONS */}
-          <div className="hidden md:flex items-center space-x-4">
+          <div className="hidden md:flex items-center space-x-3">
             
             {/* Search toggler */}
             <LiquidButton
               variant="ghost"
               size="icon"
               onClick={() => setSearchOpen(!searchOpen)}
-              className={`rounded-full transition-colors ${
-                isSticky ? 'hover:bg-gray-100 text-[#1a1a1a]' : 'hover:bg-white/10 text-white'
-              }`}
+              className={`rounded-full transition-colors ${isDarkBg ? 'text-white hover:bg-white/10' : 'text-gray-800 hover:bg-black/5'}`}
               title="Поиск на сайте"
             >
               <Search className="w-4 h-4" />
@@ -133,24 +109,20 @@ export default function Header({ currentTab, setTab, onOpenPortal, lang, setLang
               variant="ghost"
               size="sm"
               onClick={() => setLang(lang === 'RU' ? 'EN' : 'RU')}
-              className={`flex items-center space-x-1 px-2 py-1 rounded-sm text-[11px] font-black uppercase tracking-wider transition-colors border-0 ${
-                isSticky
-                  ? 'text-brand-blue-deep hover:bg-gray-50'
-                  : 'text-white hover:bg-white/10'
-              }`}
+              className={`flex items-center space-x-1 px-3 py-2 rounded-xl text-[11px] font-black uppercase tracking-wider transition-colors border-0 ${isDarkBg ? 'text-white hover:bg-white/10' : 'text-gray-800 hover:bg-black/5'}`}
             >
-              <span className={lang === 'RU' ? 'underline decoration-2 underline-offset-4' : 'text-gray-400 font-normal hover:text-white'}>RU</span>
-              <span className="text-gray-300 mx-1">/</span>
-              <span className={lang === 'EN' ? 'underline decoration-2 underline-offset-4' : 'text-gray-400 font-normal hover:text-white'}>EN</span>
+              <span className={lang === 'RU' ? (isDarkBg ? 'text-white' : 'text-brand-teal') : 'text-gray-400'}>RU</span>
+              <span className="text-gray-400 mx-1">/</span>
+              <span className={lang === 'EN' ? (isDarkBg ? 'text-white' : 'text-brand-teal') : 'text-gray-400'}>EN</span>
             </LiquidButton>
 
             {/* B2B Portal Button */}
             <LiquidButton
               variant="primary"
               onClick={onOpenPortal}
-              className="px-5 py-2 hover:bg-brand-blue-deep transition-all cursor-pointer flex items-center space-x-2 rounded-lg"
+              className="px-5 py-2 hover:bg-brand-teal-hover transition-all cursor-pointer flex items-center space-x-2 rounded-xl text-[11px]"
             >
-              <User className="w-3.5 h-3.5 text-brand-teal" />
+              <User className="w-3.5 h-3.5 text-white" />
               <span>{lang === 'RU' ? 'Личный кабинет' : 'B2B Portal'}</span>
             </LiquidButton>
 
@@ -162,9 +134,7 @@ export default function Header({ currentTab, setTab, onOpenPortal, lang, setLang
               variant="ghost"
               size="sm"
               onClick={() => setLang(lang === 'RU' ? 'EN' : 'RU')}
-              className={`px-2 py-1 rounded border text-[10px] font-bold uppercase ${
-                isSticky ? 'border-gray-300 text-black' : 'border-white/30 text-white'
-              }`}
+              className={`px-2 py-1 rounded-xl text-[10px] font-bold uppercase ${isDarkBg ? 'text-white hover:bg-white/10' : 'text-gray-800 hover:bg-black/5'}`}
             >
               {lang}
             </LiquidButton>
@@ -173,9 +143,7 @@ export default function Header({ currentTab, setTab, onOpenPortal, lang, setLang
               variant="ghost"
               size="icon"
               onClick={() => setSearchOpen(!searchOpen)}
-              className={`rounded ${
-                isSticky ? 'text-black hover:bg-gray-100' : 'text-white hover:bg-white/10'
-              }`}
+              className={`rounded-xl ${isDarkBg ? 'text-white hover:bg-white/10' : 'text-gray-800 hover:bg-black/5'}`}
             >
               <Search className="w-5 h-5" />
             </LiquidButton>
@@ -184,9 +152,7 @@ export default function Header({ currentTab, setTab, onOpenPortal, lang, setLang
               variant="ghost"
               size="icon"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className={`rounded transition-colors ${
-                isSticky ? 'text-black hover:bg-gray-100' : 'text-white hover:bg-white/10'
-              }`}
+              className={`rounded-xl transition-colors ${isDarkBg ? 'text-white hover:bg-white/10' : 'text-gray-800 hover:bg-black/5'}`}
             >
               {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </LiquidButton>

@@ -14,12 +14,36 @@ import corporateBg from './assets/images/corporate_bg_1779708974400.png';
 import { LiquidButton } from './components/ui/liquid-glass-button';
 
 import { NEWS_ARTICLES, BUSINESS_DIRECTIONS } from './data';
-import { Calendar, ArrowRight, ShieldCheck, Mail, Phone, Library, Award } from 'lucide-react';
+import { Calendar, ArrowRight, ShieldCheck, Mail, Phone, Library, Award, Package, Leaf, Sparkles, Cpu, Truck, FlaskConical, Layers } from 'lucide-react';
 
 export default function App() {
   const [currentTab, setTab] = useState<string>('main');
   const [showPortal, setShowPortal] = useState<boolean>(false);
   const [lang, setLang] = useState<'RU' | 'EN'>('RU');
+
+  const getLogoIcon = (logo: string) => {
+    switch (logo) {
+      case 'dist': return <Package className="w-6 h-6" />;
+      case 'aloe': return <Leaf className="w-6 h-6" />;
+      case 'endo': return <Sparkles className="w-6 h-6" />;
+      case 'zenit': return <Cpu className="w-6 h-6" />;
+      case 'logistics': return <Truck className="w-6 h-6" />;
+      case 'production': return <FlaskConical className="w-6 h-6" />;
+      default: return <Layers className="w-6 h-6" />;
+    }
+  };
+
+  const getLogoColor = (logo: string) => {
+    switch (logo) {
+      case 'dist': return 'bg-teal-50 text-teal-700 border-teal-100 group-hover:bg-teal-500 group-hover:text-white group-hover:border-teal-500';
+      case 'aloe': return 'bg-emerald-50 text-emerald-700 border-emerald-100 group-hover:bg-emerald-500 group-hover:text-white group-hover:border-emerald-500';
+      case 'endo': return 'bg-indigo-50 text-indigo-700 border-indigo-100 group-hover:bg-indigo-500 group-hover:text-white group-hover:border-indigo-500';
+      case 'zenit': return 'bg-blue-50 text-blue-700 border-blue-100 group-hover:bg-blue-500 group-hover:text-white group-hover:border-blue-500';
+      case 'logistics': return 'bg-gray-100 text-gray-700 border-gray-200 group-hover:bg-gray-600 group-hover:text-white group-hover:border-gray-600';
+      case 'production': return 'bg-sky-50 text-sky-700 border-sky-100 group-hover:bg-sky-500 group-hover:text-white group-hover:border-sky-500';
+      default: return 'bg-slate-50 text-slate-700 border-slate-200 group-hover:bg-slate-600 group-hover:text-white group-hover:border-slate-600';
+    }
+  };
 
   // Handle switching tabs smoothly
   const handleSetTab = (tabId: string) => {
@@ -60,7 +84,7 @@ export default function App() {
       />
 
       {/* CORE CONTENT LAYOUT SWITCHER */}
-      <main className="flex-grow pt-[72px]">
+      <main className={`flex-grow ${currentTab !== 'main' ? 'pt-[104px]' : ''}`}>
         {currentTab === 'main' && (
           <div className="space-y-0 animate-fade-in">
             {/* HERO CAROUSEL */}
@@ -103,15 +127,9 @@ export default function App() {
                     >
                       <div>
                         {/* Generated icon mapped */}
-                        {dir.iconUrl ? (
-                          <div className="w-16 h-16 rounded-xl bg-white shadow-sm flex items-center justify-center p-2 mb-4 group-hover:shadow-md transition-shadow">
-                            <img src={dir.iconUrl} alt={dir.name} className="w-full h-full object-contain" referrerPolicy="no-referrer" />
-                          </div>
-                        ) : (
-                          <div className="w-12 h-12 rounded-xl bg-brand-teal/5 border border-brand-teal/10 flex items-center justify-center font-bold text-xs text-brand-teal mb-4 group-hover:bg-brand-teal group-hover:text-white transition-colors">
-                            {dir.logo === 'dist' ? 'BSS' : dir.logo === 'aloe' ? 'АЛОЭ' : 'ENDO'}
-                          </div>
-                        )}
+                        <div className={`w-12 h-12 rounded-xl border flex items-center justify-center mb-4 transition-colors ${getLogoColor(dir.logo)}`}>
+                          {getLogoIcon(dir.logo)}
+                        </div>
                         <h3 className="text-sm font-bold text-neutral-950 mb-2 group-hover:text-brand-teal transition-colors">
                           {dir.name}
                         </h3>

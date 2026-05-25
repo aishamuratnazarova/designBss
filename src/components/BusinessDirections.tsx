@@ -1,7 +1,7 @@
 import { LiquidButton } from './ui/liquid-glass-button';
 import React, { useState } from 'react';
 import { BUSINESS_DIRECTIONS } from '../data';
-import { ExternalLink, ChevronDown, ChevronUp, Link as LinkIcon, BookOpen, Layers } from 'lucide-react';
+import { ExternalLink, ChevronDown, ChevronUp, Link as LinkIcon, BookOpen, Layers, Package, Leaf, Sparkles, Cpu, Truck, FlaskConical } from 'lucide-react';
 
 interface BusinessDirectionsProps {
   lang: 'RU' | 'EN';
@@ -30,15 +30,15 @@ export default function BusinessDirections({ lang }: BusinessDirectionsProps) {
     }
   };
 
-  const getLogoText = (logo: string) => {
+  const getLogoIcon = (logo: string) => {
     switch (logo) {
-      case 'dist': return 'BSS';
-      case 'aloe': return 'АЛОЭ';
-      case 'endo': return 'EndoArt';
-      case 'zenit': return 'ДЗЕН IT';
-      case 'logistics': return '3PL';
-      case 'production': return 'R&D';
-      default: return 'БСС';
+      case 'dist': return <Package className="w-6 h-6" />;
+      case 'aloe': return <Leaf className="w-6 h-6" />;
+      case 'endo': return <Sparkles className="w-6 h-6" />;
+      case 'zenit': return <Cpu className="w-6 h-6" />;
+      case 'logistics': return <Truck className="w-6 h-6" />;
+      case 'production': return <FlaskConical className="w-6 h-6" />;
+      default: return <Layers className="w-6 h-6" />;
     }
   };
 
@@ -92,15 +92,9 @@ export default function BusinessDirections({ lang }: BusinessDirectionsProps) {
                   <div className="flex items-start justify-between mb-6">
                     <div className="flex items-center space-x-4">
                       {/* Brand Logo Container */}
-                      {dir.iconUrl ? (
-                        <div className="w-16 h-16 rounded-xl bg-white shadow-sm flex items-center justify-center p-2">
-                          <img src={dir.iconUrl} alt={dir.name} className="w-full h-full object-contain" referrerPolicy="no-referrer" />
-                        </div>
-                      ) : (
-                        <div className={`w-14 h-14 rounded-sm border flex items-center justify-center font-display font-black text-xs tracking-widest ${getLogoColor(dir.logo)} shadow-sm`}>
-                          {getLogoText(dir.logo)}
-                        </div>
-                      )}
+                      <div className={`w-14 h-14 rounded-sm border flex items-center justify-center ${getLogoColor(dir.logo)} shadow-sm`}>
+                        {getLogoIcon(dir.logo)}
+                      </div>
                       <div>
                         <h3 className="text-base font-bold text-brand-blue-deep">
                           {dir.name}
