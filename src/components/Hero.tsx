@@ -2,6 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { ChevronLeft, ChevronRight, CornerRightDown, ArrowRight, ShieldCheck, Award } from 'lucide-react';
 import { LiquidButton } from './ui/liquid-glass-button';
 
+import bg1 from '../assets/images/pharmaceutical_distribution_bg_1779715348749.png';
+import bg2 from '../assets/images/aesthetic_medicine_bg_1779715371999.png';
+import bg3 from '../assets/images/digital_innovations_bg_1779715391092.png';
+
 interface HeroProps {
   setTab: (tab: string) => void;
   onOpenPortal: () => void;
@@ -21,7 +25,7 @@ export default function Hero({ setTab, onOpenPortal, lang }: HeroProps) {
       secondaryAction: { label: lang === 'RU' ? 'Направления' : 'Our Directions', onClick: () => setTab('direction') },
       badge: lang === 'RU' ? '30 ЛЕТ НА РЫНКЕ РОССИИ' : '30 YEARS LEADING IN RUSSIA',
       bgGradient: 'from-emerald-950/70 via-teal-900/60 to-black/80',
-      imagePlaceholder: 'Medical supply lines'
+      image: bg1
     },
     {
       title: lang === 'RU' ? 'Эстетическая медицина мирового класса' : 'World-Class Aesthetic Medicine',
@@ -32,7 +36,7 @@ export default function Hero({ setTab, onOpenPortal, lang }: HeroProps) {
       secondaryAction: { label: lang === 'RU' ? 'О бренде EndoArt' : 'About EndoArt', onClick: () => setTab('direction') },
       badge: lang === 'RU' ? 'ЭКСКЛЮЗИВНАЯ ДИСТРИБУЦИЯ' : 'EXCLUSIVE DISTRIBUTOR',
       bgGradient: 'from-cyan-950/70 via-indigo-950/60 to-black/80',
-      imagePlaceholder: 'Clinics device styling'
+      image: bg2
     },
     {
       title: lang === 'RU' ? 'Цифровые инновации и экосистема B2B' : 'Digital Innovations & B2B Ecosystem',
@@ -43,7 +47,7 @@ export default function Hero({ setTab, onOpenPortal, lang }: HeroProps) {
       secondaryAction: { label: lang === 'RU' ? 'Техподдержка' : 'Help Desk', onClick: () => setTab('contacts') },
       badge: lang === 'RU' ? 'IT-РЕШЕНИЯ ДЛЯ ФАРМАЦЕВТИКИ' : 'PHARMA ERP SYSTEMS',
       bgGradient: 'from-sky-950/70 via-slate-900/60 to-black/80',
-      imagePlaceholder: 'Tech automation data'
+      image: bg3
     }
   ];
 
@@ -60,10 +64,16 @@ export default function Hero({ setTab, onOpenPortal, lang }: HeroProps) {
   return (
     <section id="hero-slider" className="relative h-[100vh] min-h-[600px] bg-neutral-900 overflow-hidden text-white">
       
-      {/* BACKGROUND GRAPHIC (representing the medical / clinical tech vibe) */}
-      <div className="absolute inset-0 bg-cover bg-center transition-all duration-1000 transform scale-105" style={{ backgroundImage: 'url("https://images.unsplash.com/photo-1579684389782-64d84b5e901a?auto=format&fit=crop&w=1920&q=80")' }}>
-        <div className="absolute inset-0 bg-black/40" />
-      </div>
+      {/* BACKGROUND GRAPHICS */}
+      {slides.map((slide, index) => (
+        <div 
+          key={`bg-${index}`}
+          className={`absolute inset-0 bg-cover bg-center transition-opacity duration-1000 ${index === activeSlide ? 'opacity-100' : 'opacity-0'}`} 
+          style={{ backgroundImage: `url(${slide.image})` }}
+        >
+          <div className="absolute inset-0 bg-black/40" />
+        </div>
+      ))}
 
       {/* SLIDES */}
       {slides.map((slide, index) => (

@@ -227,13 +227,15 @@ export default function RadialOrbitalTimeline({
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth < 480) {
-        setRadius(100);
-      } else if (window.innerWidth < 640) {
         setRadius(120);
-      } else if (window.innerWidth < 768) {
+      } else if (window.innerWidth < 640) {
         setRadius(160);
-      } else {
+      } else if (window.innerWidth < 768) {
         setRadius(200);
+      } else if (window.innerWidth < 1024) {
+        setRadius(240);
+      } else {
+        setRadius(280);
       }
     };
     handleResize();
@@ -377,7 +379,7 @@ export default function RadialOrbitalTimeline({
         <div
           ref={containerRef}
           onClick={handleContainerClick}
-          className="w-full max-w-4xl h-[520px] sm:h-[600px] flex items-center justify-center relative overflow-hidden"
+          className="w-full max-w-6xl h-[650px] sm:h-[800px] flex items-center justify-center relative"
         >
           {/* Orbital grid systems */}
           <div
@@ -471,7 +473,7 @@ export default function RadialOrbitalTimeline({
                   {/* Title indicator label under the circle node */}
                   <div
                     className={`
-                      absolute top-11 whitespace-nowrap
+                      absolute ${position.y > 0 ? "bottom-11" : "top-11"} whitespace-nowrap
                       text-[9px] sm:text-[10px] font-bold tracking-wider
                       transition-all duration-300
                       ${isExpanded ? "text-brand-teal scale-110" : "text-gray-500"}
@@ -482,8 +484,8 @@ export default function RadialOrbitalTimeline({
 
                   {/* Popover Card detailing information of the specific corporate node */}
                   {isExpanded && (
-                    <Card className="absolute top-16 w-56 sm:w-64 -translate-x-1/2 left-1/2 overflow-visible">
-                      <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-px h-3 bg-brand-teal/40"></div>
+                    <Card className={`absolute ${position.y > 0 ? "bottom-16" : "top-16"} w-56 sm:w-64 -translate-x-1/2 left-1/2 overflow-visible z-50`}>
+                      <div className={`absolute ${position.y > 0 ? "-bottom-3" : "-top-3"} left-1/2 -translate-x-1/2 w-px h-3 bg-brand-teal/40`}></div>
                       <CardHeader className="pb-2">
                         <div className="flex justify-between items-center">
                           <Badge className={`px-2 text-[9px] font-bold uppercase tracking-wider ${getStatusStyles(item.status)}`}>
