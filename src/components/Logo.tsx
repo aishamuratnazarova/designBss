@@ -80,20 +80,7 @@ export default function Logo({
   <path class="cls-1" d="m375.36,587v-30.48h3.89v13.01h16.25v-13.01h3.89v30.48h-3.89v-13.74h-16.25v13.74h-3.89Z"/>
   <path class="cls-1" d="m423.98,556.52v3.78h-12.87v26.7h-3.89v-30.48h16.75Z"/>
 </svg>
-
-      {/* Accompanying textual branding elements (standard HTML flow next to the SVG image/icon) */}
-      {showText && (
-        <div className="flex items-center">
-          <span
-            className="font-display font-extrabold text-3xl tracking-widest"
-            style={{
-              color: colors.text_bss,
-            }}
-          >
-            {lang === 'RU' ? 'БСС' : 'BSS'}
-          </span>
-        </div>
-      )}
+      
     </div>
   );
 }
