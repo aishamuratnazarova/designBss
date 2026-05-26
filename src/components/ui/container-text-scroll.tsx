@@ -76,9 +76,9 @@ export const Card = ({
           "0 0 #0000004d, 0 9px 20px #0000004a, 0 37px 37px #00000042, 0 84px 50px #00000026, 0 149px 60px #0000000a, 0 233px 65px #00000003",
         perspective: "1000px"
       }}
-      className="relative h-[25rem] md:h-[35rem] w-full border border-neutral-200/50 bg-[#1a1a1a]/5 rounded-[24px] shadow-2xl overflow-hidden backdrop-blur-md"
+      className="relative h-[25rem] md:h-[35rem] w-full border border-neutral-200/50 bg-[#f9fafb] rounded-[24px] shadow-2xl overflow-hidden"
     >
-      <div className="h-full w-full rounded-2xl bg-white/75 overflow-hidden">
+      <div className="h-full w-full rounded-2xl bg-white overflow-hidden">
         {children}
       </div>
     </motion.div>

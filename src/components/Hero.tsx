@@ -153,7 +153,7 @@ export default function Hero({ setTab, onOpenPortal, lang }: HeroProps) {
             <div className="grid grid-cols-1 lg:grid-cols-12 h-full w-full">
               
               {/* Left Column: Rich textual information, Actions, stats */}
-              <div className="lg:col-span-7 p-6 sm:p-8 md:p-10 flex flex-col justify-between h-full overflow-y-auto bg-white/40 backdrop-blur-sm">
+              <div className="lg:col-span-7 p-6 sm:p-8 md:p-10 flex flex-col justify-between h-full overflow-y-auto bg-white/95">
                 
                 <div className="space-y-6">
                   {/* Long descriptive text */}
