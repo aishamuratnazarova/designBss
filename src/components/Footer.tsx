@@ -1,4 +1,3 @@
-import { LiquidButton } from './ui/liquid-glass-button';
 import React from 'react';
 import { Mail, Phone, MapPin, Shield, HelpCircle, Briefcase, Award, ExternalLink } from 'lucide-react';
 import Logo from './Logo';
@@ -54,12 +53,16 @@ export default function Footer({ setTab, onOpenPortal, lang }: FooterProps) {
                 { id: 'contacts', label: lang === 'RU' ? 'Контакты и офисы' : 'Contacts' },
               ].map((link) => (
                 <li key={link.id}>
-                  <LiquidButton
-                    onClick={() => setTab(link.id)}
-                    className="hover:text-brand-teal transition-colors text-left text-xs font-sans font-medium"
+                  <a
+                    href={`#${link.id}`}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setTab(link.id);
+                    }}
+                    className="hover:text-brand-teal transition-colors text-left text-xs font-sans font-medium block"
                   >
                     {link.label}
-                  </LiquidButton>
+                  </a>
                 </li>
               ))}
             </ul>
@@ -72,13 +75,17 @@ export default function Footer({ setTab, onOpenPortal, lang }: FooterProps) {
             </h4>
             <ul className="space-y-2 text-sm">
               <li>
-                <LiquidButton
-                  onClick={onOpenPortal}
+                <a
+                  href="#portal"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    onOpenPortal();
+                  }}
                   className="flex items-center space-x-1 hover:text-brand-teal text-xs transition-colors font-sans font-medium cursor-pointer"
                 >
                   <Shield className="w-3.5 h-3.5 text-brand-teal" />
                   <span>{lang === 'RU' ? 'Вход в личный кабинет БСС' : 'B2B Client Sign In'}</span>
-                </LiquidButton>
+                </a>
               </li>
               <li>
                 <a
