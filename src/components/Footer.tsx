@@ -24,7 +24,7 @@ export default function Footer({ setTab, onOpenPortal, lang }: FooterProps) {
             <Logo
               variant="dark"
               showText={true}
-              size={36}
+              size={56}
               onClick={() => setTab('main')}
               lang={lang}
               className="cursor-pointer"

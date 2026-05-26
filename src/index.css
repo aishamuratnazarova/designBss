@@ -6,11 +6,33 @@
   --font-display: "Space Grotesk", sans-serif;
   --color-brand-teal: #0BCFCA;
   --color-brand-teal-hover: #0abcb7;
-  --color-brand-teal-dark: #002B5B;
-  --color-brand-blue-deep: #002B5B;
+  --color-brand-teal-dark: #1a1a1a;
+  --color-brand-blue-deep: #082d3d;
   --color-brand-overcast: #99dfff;
   --color-brand-overcast-light: #f1fafe;
   --color-brand-black: #1a1a1a;
+
+  --animate-aurora: aurora 60s linear infinite;
+
+  @keyframes aurora {
+    from {
+      background-position: 50% 50%, 50% 50%;
+    }
+    to {
+      background-position: 350% 50%, 350% 50%;
+    }
+  }
+}
+
+:root {
+  --white: #ffffff;
+  --black: #000000;
+  --transparent: transparent;
+  --blue-500: #3b82f6;
+  --indigo-300: #a5b4fc;
+  --blue-300: #93c5fd;
+  --violet-200: #ddd6fe;
+  --blue-400: #60a5fa;
 }
 
 @layer utilities {

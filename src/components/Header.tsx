@@ -64,7 +64,7 @@ export default function Header({ currentTab, setTab, onOpenPortal, lang, setLang
           {/* LOGO */}
           <Logo
             onClick={() => setTab('main')}
-            size={36}
+            size={64}
             showText={true}
             variant={isDarkBg ? 'light' : 'adaptive'}
             lang={lang}
