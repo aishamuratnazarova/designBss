@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { ChevronLeft, ChevronRight, CornerRightDown, ArrowRight, ShieldCheck, Award } from 'lucide-react';
 import { LiquidButton } from './ui/liquid-glass-button';
 
-import bg1 from '../assets/images/pharmaceutical_distribution_bg_1779715348749.png';
-import bg2 from '../assets/images/aesthetic_medicine_bg_1779715371999.png';
-import bg3 from '../assets/images/digital_innovations_bg_1779715391092.png';
+import bg1 from '../assets/images/bss.png';
+import bg2 from '../assets/images/beauty.png';
+import bg3 from '../assets/images/digital_innovations.png';
 
 interface HeroProps {
   setTab: (tab: string) => void;
